@@ -3,9 +3,9 @@ import type { Todo } from "./types";
 import TodoTable from "./TodoTable";
 
 function TodoList() {
-  const [todo, setTodo] = useState<Todo>({description: '', date: '', priority: 'low'});
+  const [todo, setTodo] = useState<Todo>({ description: '', date: '', priority: 'low' });
   const [todos, setTodos] = useState<Todo[]>([]);
-  
+
   const addTodo = () => {
     if (!todo.description.trim() || !todo.date.trim()) {
       alert('Please fill in all fields');
@@ -13,36 +13,37 @@ function TodoList() {
     }
 
     setTodos([todo, ...todos]);
-    setTodo({description: '', date: '', priority: 'low'});
+    setTodo({ description: '', date: '', priority: 'low' });
   };
 
-  return(
+  return (
     <>
-      <h3>My Todos</h3> 
-      <div id="inputs"> 
-        <input 
-          placeholder="Description" 
-          onChange={event => setTodo({...todo, description: event.target.value})} 
-          value={todo.description} 
+      <h3>My Todos</h3>
+      <div id="inputs">
+        <input
+          placeholder="Description"
+          onChange={event => setTodo({ ...todo, description: event.target.value })}
+          value={todo.description}
         />
-        <input 
+        <input
           placeholder="Date"
-          onChange={event => setTodo({...todo, date: event.target.value})} 
-          value={todo.date} 
+          onChange={event => setTodo({ ...todo, date: event.target.value })}
+          value={todo.date}
         />
         <select
           title="Priority"
-          onChange={event => setTodo({...todo, priority: event.target.value as 'low' | 'medium' | 'high'})} 
-          value={todo.priority} 
+          onChange={event => setTodo({ ...todo, priority: event.target.value as 'low' | 'medium' | 'high' })}
+          value={todo.priority}
         >
           <option value="low">Low</option>
           <option value="medium">Medium</option>
           <option value="high">High</option>
         </select>
-        <button onClick={addTodo}>Add</button> 
-      </div> 
-      <TodoTable todos={todos} /> 
-     </>
+        <button onClick={addTodo}>Add</button>
+        <button onClick={() => setTodos([])}>Clear</button>
+      </div>
+      <TodoTable todos={todos} />
+    </>
   );
 
 }
